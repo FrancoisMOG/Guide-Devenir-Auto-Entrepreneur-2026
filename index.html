@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide Auto-Entrepreneur 2026 - Optimisé PDF</title>
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #0f172a;
+            --bg-body: #f1f5f9;
+            --bg-card: #ffffff;
+            --border: #e2e8f0;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            
+            /* Couleurs de fond pour l'impression */
+            --bg-step: #eff6ff;
+            --bg-warning: #fffbeb;
+            --bg-danger: #fef2f2;
+            --bg-success: #ecfdf5;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--secondary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        /* --- CONTAINER ÉCRAN --- */
+        .page-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: var(--bg-card);
+            padding: 25mm;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        /* --- TYPOGRAPHIE ÉCRAN --- */
+        h1 { font-size: 26px; color: var(--primary-dark); margin-bottom: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 10px; }
+        h2 { font-size: 20px; margin-top: 30px; margin-bottom: 15px; color: var(--secondary); }
+        h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+        p, li { margin-bottom: 8px; font-size: 15px; }
+        ul { padding-left: 20px; margin-bottom: 15px; }
+        
+        .intro {
+            background: var(--bg-step);
+            padding: 20px;
+            border-left: 5px solid var(--primary);
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 30px;
+        }
+
+        /* --- COMPOSANTS ÉCRAN --- */
+        .step-card { 
+            background: #fff; 
+            border: 1px solid var(--border); 
+            border-left: 5px solid var(--primary); 
+            padding: 20px; 
+            margin-bottom: 20px; 
+            border-radius: 4px; 
+        }
+        .step-number { 
+            background: var(--primary); 
+            color: white; 
+            width: 26px; 
+            height: 26px; 
+            text-align: center; 
+            line-height: 26px; 
+            border-radius: 50%; 
+            font-size: 13px; 
+            margin-right: 10px; 
+            display: inline-block; 
+            font-weight: bold; 
+        }
+
+        /* Layouts Grid (Écran) */
+        .plafonds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+        .info-box { background: var(--bg-warning); border: 1px solid #fcd34d; padding: 15px; border-radius: 6px; }
+        .info-box.alert { background: var(--bg-danger); border-color: #fca5a5; }
+        .big-number { font-size: 24px; font-weight: bold; color: #b45309; display: block; margin: 5px 0; }
+        .alert .big-number { color: #b91c1c; }
+
+        .failure-list { list-style: none; padding: 0; }
+        .failure-item { display: flex; gap: 15px; margin-bottom: 15px; align-items: flex-start; }
+        .icon-cross { 
+            min-width: 24px; height: 24px; background: #fee2e2; color: #ef4444; border-radius: 50%; 
+            display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0;
+        }
+
+        .advice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .advice-card { background: var(--bg-success); border: 1px solid #a7f3d0; padding: 20px; border-radius: 8px; }
+        .advice-card h3 { color: #047857; margin-top: 0; }
+        .check-list { list-style: none; padding: 0; }
+        .check-list li { position: relative; padding-left: 25px; margin-bottom: 8px; }
+        .check-list li::before { content: "✔"; color: #059669; position: absolute; left: 0; font-weight: bold; top: 0; }
+
+        .fab-print {
+            position: fixed; bottom: 30px; right: 30px; background-color: var(--secondary); color: white;
+            border: none; padding: 15px 25px; border-radius: 50px; cursor: pointer; font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; gap: 10px;
+            transition: transform 0.2s;
+        }
+        .fab-print:hover { background-color: var(--primary); transform: translateY(-2px); }
+
+        /* --- IMPRESSION : MARGES RÉDUITES & OPTIMISÉ --- */
+        @media print {
+            @page {
+                size: A4;
+                margin: 8mm; /* Marge réduite au maximum pour gagner de la hauteur */
+            }
+
+            body {
+                background: white;
+                color: #1e293b;
+                padding: 0;
+                font-size: 11pt;
+                line-height: 1.45; /* Ligne légèrement plus serrée pour optimiser */
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .page-container {
+                width: 100%;
+                max-width: none;
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+                border-radius: 0;
+            }
+
+            .fab-print, .step-number, .icon-cross { display: none; }
+
+            /* Titres */
+            h1 { 
+                font-size: 16pt; /* Légèrement plus petit */
+                margin-bottom: 6mm; 
+                border-bottom: 2px solid var(--primary); 
+                padding-bottom: 3mm; 
+                color: var(--primary-dark);
+            }
+            h2 { 
+                font-size: 13pt; 
+                margin-top: 5mm; 
+                margin-bottom: 3mm; 
+                color: var(--secondary);
+                page-break-after: avoid;
+            }
+            h3 { font-size: 11pt; font-weight: 700; color: var(--primary-dark); margin-bottom: 2mm; }
+
+            /* Intro */
+            .intro {
+                background: var(--bg-step) !important;
+                border-left: 4px solid var(--primary) !important;
+                padding: 5mm; /* Réduit */
+                margin-bottom: 5mm;
+            }
+
+            /* ÉTAPES : Padding réduit */
+            .step-card {
+                background: var(--bg-step) !important;
+                border-left: 4px solid var(--primary) !important;
+                border: 1px solid #bfdbfe !important;
+                padding: 5mm; /* Réduit de 8mm à 5mm */
+                margin-bottom: 4mm; /* Réduit */
+                break-inside: avoid;
+            }
+
+            /* Layout colonne unique (conservé) */
+            .plafonds-grid, .advice-grid, .failure-list {
+                display: block !important;
+            }
+
+            /* Info & Advice Boxes : Padding réduit */
+            .info-box, .advice-card {
+                padding: 4mm; /* Réduit */
+                margin-bottom: 3mm;
+                break-inside: avoid;
+                border-radius: 2px;
+            }
+            
+            .info-box { background: var(--bg-warning) !important; border: 1px solid #fcd34d !important; }
+            .info-box.alert { background: var(--bg-danger) !important; border-color: #fca5a5 !important; }
+            .advice-card { background: var(--bg-success) !important; border: 1px solid #a7f3d0 !important; }
+
+            /* Failure Items */
+            .failure-item {
+                display: block;
+                background: var(--bg-danger) !important;
+                border-left: 4px solid #ef4444 !important;
+                padding: 3mm 3mm 3mm 6mm; /* Réduit */
+                margin-bottom: 3mm;
+                break-inside: avoid;
+            }
+            .failure-item strong {
+                display: block;
+                color: #991b1b;
+                margin-bottom: 1mm;
+                font-size: 11pt;
+            }
+
+            /* Listes internes : Espacement réduit */
+            ul { margin-bottom: 2mm; padding-left: 15px; }
+            li { margin-bottom: 1mm; }
+        }
+
+        @media (max-width: 768px) {
+            .plafonds-grid, .advice-grid { grid-template-columns: 1fr; }
+            body { padding: 10px; }
+            .page-container { padding: 15mm; }
+        }
+    </style>
+</head>
+<body>
+
+    <button class="fab-print" onclick="window.print()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Imprimer PDF
+    </button>
+
+    <article class="page-container">
+        <header>
+            <h1>Guide : Devenir Auto-Entrepreneur (2026)</h1>
+            <div class="intro">
+                Pour devenir auto entrepreneur (micro entrepreneur) en 2026, tout se fait en ligne et la démarche se résume à quelques grandes étapes : déclaration sur le guichet unique, immatriculation, puis création de votre espace URSSAF et mise en place de vos outils (compte bancaire, assurances, etc.).
+            </div>
+        </header>
+
+        <section class="steps">
+            <h2>1. Les Étapes de Création</h2>
+
+            <div class="step-card">
+                <h3><span class="step-number">1</span>Vérifier que vous pouvez être micro entrepreneur</h3>
+                <ul>
+                    <li>Être une personne physique, majeure ou mineure émancipée, avec une adresse en France.</li>
+                    <li>Avoir, si vous êtes hors UE, un titre de séjour qui autorise la création d’entreprise.</li>
+                    <li>Exercer une activité compatible avec le régime micro et respecter les plafonds de chiffre d’affaires (micro fiscal et micro social).</li>
+                </ul>
+                <p style="margin-top:5px;"><em>Exemple : pour bénéficier du régime micro fiscal, le chiffre d’affaires hors taxes ne doit pas dépasser les seuils annuels fixés (différents selon commerce, services, libéral).</em></p>
+            </div>
+
+            <div class="step-card">
+                <h3><span class="step-number">2</span>Préparer vos informations et documents</h3>
+                <ul>
+                    <li>Choisir votre activité principale (commerce, artisanat, libéral) et la description précise qui servira à déterminer votre code APE.</li>
+                    <li>Préparer : pièce d’identité, justificatif de domicile, déclaration sur l’honneur de non condamnation, éventuellement diplômes si activité réglementée.</li>
+                </ul>
+                <p style="margin-top:5px;">Ces pièces seront à téléverser lors de la déclaration sur le guichet unique.</p>
+            </div>
+
+            <div class="step-card">
+                <h3><span class="step-number">3</span>Déclarer la création sur le guichet unique (INPI)</h3>
+                <ul>
+                    <li>Aller sur le Guichet unique des entreprises (INPI) et choisir « création d’entreprise » puis entreprise individuelle / micro entreprise.</li>
+                    <li>Remplir les rubriques : identité, adresse, activité, régime social et fiscal, puis joindre les pièces demandées.</li>
+                    <li>Valider et transmettre la formalité : cela vaut demande d’immatriculation au Registre national des entreprises (et au RCS/RM si besoin).</li>
+                </ul>
+                <p style="margin-top:5px;"><em>La démarche est 100% en ligne et gratuite pour la déclaration elle même (hors éventuels frais liés à certaines immatriculations).</em></p>
+            </div>
+
+            <div class="step-card">
+                <h3><span class="step-number">4</span>Créer votre espace URSSAF et (option) demander l’ACRE</h3>
+                <ul>
+                    <li>Une fois la déclaration faite, créer votre compte sur autoentrepreneur.urssaf.fr pour déclarer votre chiffre d’affaires et payer vos cotisations.</li>
+                    <li>Vous pouvez demander l’ACRE (réduction temporaire des cotisations) au moment de la création, via ce même parcours ; la demande doit être faite en même temps que la création.</li>
+                </ul>
+                <p style="margin-top:5px;">Après traitement, vous recevrez votre confirmation d’affiliation à la Sécurité sociale des indépendants.</p>
+            </div>
+
+            <div class="step-card">
+                <h3><span class="step-number">5</span>Recevoir votre SIRET et commencer l’activité</h3>
+                <ul>
+                    <li>En général, vous recevez votre numéro SIRET (inscription au répertoire SIRENE) sous 1 à 2 semaines.</li>
+                    <li>Il est conseillé d’attendre ce SIRET avant de facturer vos clients, pour indiquer le numéro sur vos factures.</li>
+                </ul>
+                <p style="margin-top:5px;">Vous recevez aussi un mémento fiscal et les notifications d’affiliation aux différents régimes (social, fiscal).</p>
+            </div>
+
+            <div class="step-card">
+                <h3><span class="step-number">6</span>Mettre en place la gestion courante</h3>
+                <ul>
+                    <li>Ouvrir un compte bancaire dédié à l’activité ; il devient obligatoire si votre chiffre d’affaires dépasse 10 000 € pendant 2 années consécutives.</li>
+                    <li>Souscrire les assurances professionnelles nécessaires (responsabilité civile pro, décennale pour le bâtiment, etc.) selon votre secteur.</li>
+                    <li>Tenir un livre des recettes (et des achats pour certaines activités), émettre des factures conformes, déclarer votre chiffre d’affaires (mensuel ou trimestriel) sur le site URSSAF et payer vos cotisations.</li>
+                </ul>
+                <p style="margin-top:5px;">Si vous voulez, je peux ensuite vous faire une liste très concrète « à cocher » adaptée à votre projet.</p>
+            </div>
+        </section>
+
+        <section class="thresholds">
+            <h2>2. Plafonds & Régime</h2>
+            
+            <p>Pour 2026, les plafonds de chiffre d’affaires de la micro entreprise (pour rester au régime micro) sont relevés à 203 100 € pour la vente et 83 600 € pour les prestations de services et activités libérales.</p>
+            <br>
+            
+            <div class="plafonds-grid">
+                <div class="info-box">
+                    <h3>Vente & Hébergement</h3>
+                    <span class="big-number">203 100 €</span>
+                    <p>Plafond annuel HT pour bénéficier du régime micro entreprise en 2026, 2027 et 2028.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Services & Libéral</h3>
+                    <span class="big-number">83 600 €</span>
+                    <p>Plafond annuel HT pour les mêmes années.</p>
+                </div>
+                <div class="info-box" style="grid-column: span 2;">
+                    <h3>Activité Mixte</h3>
+                    <p>Le plafond global reste 203 100 €, avec une limite de 83 600 € pour la partie prestations de services. Ces montants sont appréciés en chiffre d’affaires encaissé (et non simplement facturé) et peuvent être proratisés la première année.</p>
+                </div>
+                <div class="info-box alert" style="grid-column: span 2;">
+                    <h3>Attention : Ne pas confondre avec la TVA</h3>
+                    <ul style="margin-bottom:0;">
+                        <li>Les seuils de franchise de TVA en 2026 restent fixés à 85 000 € (vente) et 37 500 € (services), avec des seuils majorés à 93 500 € et 41 250 €.</li>
+                        <li>Les plafonds de chiffre d’affaires micro entreprise sont donc plus élevés que les seuils de TVA : on peut devoir facturer la TVA tout en restant au régime micro.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="failures">
+            <h2>3. Raisons des échecs</h2>
+            <p>Plusieurs erreurs reviennent souvent chez les auto entrepreneurs et expliquent beaucoup d’échecs : manque de préparation (offre, marché, tarifs), mauvaise gestion financière, négligence administrative et isolement.</p>
+            
+            <ul class="failure-list">
+                <li class="failure-item">
+                    <strong>1. Pas de vraie préparation du projet</strong>
+                    Se lancer sans étude de marché ni business plan minimal : offre floue, cible mal définie, peu ou pas de clients. Copier ce que font les autres sans vérifier les besoins locaux ou en ligne.
+                </li>
+                <li class="failure-item">
+                    <strong>2. Mauvaise gestion de l’argent</strong>
+                    Confondre chiffre d’affaires et bénéfice, oublier qu’il y a des charges. Ne pas suivre sa trésorerie, travailler sans budget, tarifer trop bas. Dépenser trop vite alors que l’activité n’est pas encore stabilisée.
+                </li>
+                <li class="failure-item">
+                    <strong>3. Négligence administrative</strong>
+                    Oublier les déclarations de chiffre d’affaires URSSAF, payer en retard, ou ignorer des relances (majorations, dettes). Ne pas vérifier les obligations du métier (assurances, normes, contrats écrits, CGV, RGPD).
+                </li>
+                <li class="failure-item">
+                    <strong>4. Manque de clients faute de marketing</strong>
+                    Penser que « le bouche à oreille suffira » sans stratégie pour se rendre visible. Ne pas savoir expliquer clairement son offre et sa valeur ajoutée, donc difficile de convaincre ou de se différencier.
+                </li>
+                <li class="failure-item">
+                    <strong>5. Isolement, surcharge et épuisement</strong>
+                    Vouloir tout faire seul (commercial, prestation, administratif, compta). Accepter tout et n’importe quoi (prix bas, délais impossibles), travailler trop, sans repos ni limites.
+                </li>
+            </ul>
+        </section>
+
+        <section class="advice">
+            <h2>4. Conseils Pratiques</h2>
+            <p>Voici une liste de conseils pratiques pour quelqu’un qui se lance en auto entrepreneur.</p>
+            <br>
+            
+            <div class="advice-grid">
+                <div class="advice-card">
+                    <h3>1. Clarifier ton projet</h3>
+                    <ul class="check-list">
+                        <li>Définir précisément ton activité, ton client idéal et le problème que tu vas résoudre pour lui.</li>
+                        <li>Vérifier la réglementation de ton métier (diplômes, assurances obligatoires, règles spécifiques).</li>
+                        <li>Poser quelques objectifs simples : revenu visé, temps de travail disponible, nombre de clients par mois.</li>
+                    </ul>
+                </div>
+                <div class="advice-card">
+                    <h3>2. Préparer le terrain</h3>
+                    <ul class="check-list">
+                        <li>Faire une mini étude de marché : concurrents, prix, besoins des clients dans ta zone ou en ligne.</li>
+                        <li>Calculer tes tarifs à partir de tes charges et de ton temps, et pas uniquement « au feeling ».</li>
+                        <li>Lister tes dépenses de départ et vérifier que c’est rentable.</li>
+                    </ul>
+                </div>
+                <div class="advice-card">
+                    <h3>3. Soigner les démarches</h3>
+                    <ul class="check-list">
+                        <li>Rassembler les documents : pièce d’identité, justificatif de domicile, déclaration sur l’honneur, diplômes si activité réglementée.</li>
+                        <li>Créer ton entreprise sur le Guichet unique INPI, puis ton espace URSSAF.</li>
+                        <li>Ouvrir un compte bancaire dédié dès que possible et négocier les frais avec la banque.</li>
+                    </ul>
+                </div>
+                <div class="advice-card">
+                    <h3>4. Bonne organisation</h3>
+                    <ul class="check-list">
+                        <li>Utiliser un outil (tableur ou logiciel) pour suivre tes devis, factures, encaissements et dépenses.</li>
+                        <li>Tenir ton livre des recettes et ton registre des achats si tu vends des biens.</li>
+                        <li>Bloquer chaque semaine un créneau « administratif/gestion » pour ne pas te laisser déborder.</li>
+                    </ul>
+                </div>
+                <div class="advice-card">
+                    <h3>5. Premiers clients</h3>
+                    <ul class="check-list">
+                        <li>Créer des supports simples : profil pro sur les réseaux, fiche Google Business, éventuellement une petite page de présentation.</li>
+                        <li>Activer ton réseau : anciens collègues, amis, associations, structures d’accompagnement.</li>
+                        <li>Proposer quelques offres claires (2–3 prestations bien définies) plutôt qu’une liste interminable.</li>
+                    </ul>
+                </div>
+                <div class="advice-card">
+                    <h3>6. Santé & Réputation</h3>
+                    <ul class="check-list">
+                        <li>Apprendre à dire non aux missions mal payées, irréalistes ou qui ne te conviennent pas.</li>
+                        <li>Respecter les délais annoncés, communiquer en cas de retard, soigner la qualité plutôt que la quantité.</li>
+                        <li>Garder des temps de repos et de formation pour ne pas t’épuiser.</li>
+                    </ul>
+                </div>
+                <div class="advice-card" style="grid-column: span 2; text-align: center; background: #f0f9ff; border-color: #bae6fd;">
+                    <h3>7. Continuer à apprendre</h3>
+                    <p>Suivre des formations courtes, rejoindre un réseau d'entrepreneurs et mettre à jour tes objectifs et tes tarifs régulièrement.</p>
+                </div>
+            </div>
+        </section>
+    </article>
+
+</body>
+</html>
